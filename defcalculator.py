@@ -21,10 +21,15 @@ def calculator(n):
     n = n.replace(')', '').strip() #문자열 입력이라 n을 얻을때 경우에 따라 ')'가 붙어나와서 괄호 기호들을 다 지워버림
     if '--' in n:
         n = n.replace('--', '+') #마이너스 두개는 플러스
+    if '++' in n:
+        n = n.replace('++', '') #중복되는 플러스들 다 삭제함
 
     for t, i in enumerate(n): #반복문을 통해 수식에있는 연산자를 순서대로 order 리스트에 넣어줌
         if '+' in i:
-            order.append('+')
+            if t == 0:
+                pass
+            else:
+                order.append('+')
         elif '-' in i:
             if i == n[0] or n[t - 1] == '^' or n[t - 1] =='+' or n[t - 1] == '*' or n[t - 1] == '/' :
                 pass

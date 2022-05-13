@@ -105,7 +105,7 @@ class Calculator:
             order = []
         while(1): #총 연산자 갯수만큼 연산을 하면 됨
             if order == []:
-                result = str(round(num[0], 4))
+                result = str(round(num[0], 10))
                 break  
             for j in range(len(order)): #일단 반복문으로 해결 ^^ 이렇게 찾을때마다 break시키고 다중반복하면 인덱스 변해도 곱셈 범위 유지가능
                 for t, i in enumerate(order): #연산이 길어지면 이런게 더필요함.... 나중에생각해보자.
@@ -143,7 +143,7 @@ class Calculator:
                     num.pop(i+1) 
                     order.remove('-') 
                     break
-            result = str(round(num[0], 4))        
+            result = str(round(num[0], 10))        
                     
         return result #임시방편. 소수점 자르기
 

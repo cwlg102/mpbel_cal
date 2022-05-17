@@ -1,5 +1,5 @@
 class Calculator:
-    def RecurCalculator(self, input_): #계산기, 재귀로 타고 들어오는 함수. 외부에서 쓸땐 매개변수 필요
+    def MainofCalculator(self, input_): #계산기, 재귀로 타고 들어오는 함수. 외부에서 쓸땐 매개변수 필요
         #여기서는 매개변수 주지않아도 괜찮
         self.input_ = input_
         bcnt = Calculator.BracketCount(self.input_)
@@ -35,13 +35,13 @@ class Calculator:
                 break
         return bketix_1st, bketix_2nd
 
-    def RecurEngine(bketix_1st, bketix_2nd, input_): #괄호를 떼고 메인 함수(RecurCalculator)로 보내주는 함수
+    def RecurEngine(bketix_1st, bketix_2nd, input_): #괄호를 떼고 메인 함수(MainofCalculator)로 보내주는 함수
         obj = Calculator() #이렇게 호출해줄땐 매개변수를 주어야함!
         #재귀 타고 들어갈 함수가 Calculator 클래스의 self 매개변수? 인자를 가진 
-        #RecurCalculator라는 함수라서 이렇게 매개변수를 줘야 
+        #MainofCalculator라는 함수라서 이렇게 매개변수를 줘야 
         #변수 한개 필요한데 두개줬다 라는 오류가 안뜸
         #이게 정확히 맞는진 모르겠으나....
-        #'('의 인덱스중 최댓값 +1, ')'의 인덱스 사이로 묶어서 괄호없게 만든후 다시 RecurCalculator로 보내서 계산
+        #'('의 인덱스중 최댓값 +1, ')'의 인덱스 사이로 묶어서 괄호없게 만든후 다시 MainofCalculator로 보내서 계산
         if bketix_1st == [] and bketix_2nd == []:
                 pass #재귀를 통해 이 단계까지 와야 더 이상 다시 돌아가지않음
         else:
@@ -49,7 +49,7 @@ class Calculator:
             v = bketix_2nd[0]
             fir = input_[:u]
             sec = input_[v+1:]
-            recur = obj.RecurCalculator(input_[u+1:v])
+            recur = obj.MainofCalculator(input_[u+1:v])
             input_ = fir + recur + sec
         return input_
    
@@ -167,7 +167,7 @@ while(1):
     para = Calculator()
     print('나눗셈후 곱셈은 분수로 판단됩니다.')
     inputnumber = input('필요한 연산을 띄어쓰기 없이 입력해주세요: ')
-    result = float(para.RecurCalculator(inputnumber))
+    result = float(para.MainofCalculator(inputnumber))
     print(result)
 #testset
 '''

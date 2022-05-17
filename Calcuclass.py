@@ -121,45 +121,45 @@ class Calculator:
                 result = str(round(numbers[0], 10))
                 break  
             for j in range(len(order)): #일단 반복문으로 해결 ^^ 이렇게 찾을때마다 break시키고 다중반복하면 인덱스 변해도 곱셈 범위 유지가능
-                for idx, orderelement in enumerate(order): #연산이 길어지면 이런게 더필요함.... 나중에생각해보자.
+                for idx1, orderelement in enumerate(order): #연산이 길어지면 이런게 더필요함.... 나중에생각해보자.
                     if '*' in orderelement:
-                        numbers[idx] = numbers[idx] * numbers[idx + 1] #계산에 필요한 숫자의 인덱스와 해당 숫자로 계산하기위해 필요한 연산자의 인덱스는 일치함
-                        numbers.pop(idx+1) #remove로하면 겹치는 원소가 존재하면 해당원소 지우질 못함 ex) 2+3*6*2/2 (2가 여러개있는데 인덱스를 잡아줘도 값이 같으면 앞에꺼를 삭제해버림, 따라서 pop을써야)
+                        numbers[idx1] = numbers[idx1] * numbers[idx1 + 1] #계산에 필요한 숫자의 인덱스와 해당 숫자로 계산하기위해 필요한 연산자의 인덱스는 일치함
+                        numbers.pop(idx1+1) #remove로하면 겹치는 원소가 존재하면 해당원소 지우질 못함 ex) 2+3*6*2/2 (2가 여러개있는데 인덱스를 잡아줘도 값이 같으면 앞에꺼를 삭제해버림, 따라서 pop을써야)
                         order.remove('*') #연산자는 어차피 순서대로 계산이라 상관없음, 사용한 연산자는 리스트에서 삭제
                         break
             #-8*-9*-100*0.32-100
             
             flag = 0 #0으로 나누는 경우 반복을 빠져나갈 깃발
             for extra_repeat in range(len(order)):
-                for idx in range(len(order)):
-                    if order[idx] == '/':
-                        if numbers[idx + 1] == 0: 
+                for idx2 in range(len(order)):
+                    if order[idx2] == '/':
+                        if numbers[idx2 + 1] == 0: 
                             print('/////////////0으로 나눌수는 없음/////////////')
                             flag = 1
                             break   
-                        numbers[idx] = numbers[idx] / numbers[idx + 1]
-                        numbers.pop(idx+1)
+                        numbers[idx2] = numbers[idx2] / numbers[idx2 + 1]
+                        numbers.pop(idx2+1)
                         order.remove('/')
                         break
                 if flag: break    
             if flag: break  
 
-            for idx in range(len(order)):
-                if order[idx] == '+':
-                    numbers[idx] = numbers[idx] + numbers[idx + 1]
-                    numbers.pop(idx+1)
+                
+            for idx3 in range(len(order)):
+                if order[idx3] == '+':
+                    numbers[idx3] = numbers[idx3] + numbers[idx3 + 1]
+                    numbers.pop(idx3+1)
                     order.remove('+')
                     break
-            for idx in range(len(order)):
-                if order[idx] == '-':
-                    numbers[idx] = numbers[idx] - numbers[idx + 1]
-                    numbers.pop(idx+1) 
+                
+                elif order[idx3] == '-':
+                    numbers[idx3] = numbers[idx3] - numbers[idx3 + 1]
+                    numbers.pop(idx3+1) 
                     order.remove('-') 
                     break
             result = str(round(numbers[0], 10))        
                     
         return result #임시방편. 소수점 자르기
-
     
 while(1):
     para = Calculator()

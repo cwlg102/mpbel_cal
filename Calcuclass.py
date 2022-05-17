@@ -120,7 +120,7 @@ class Calculator:
             if order == []:
                 result = str(round(numbers[0], 10))
                 break  
-            for j in range(len(order)): #일단 반복문으로 해결 ^^ 이렇게 찾을때마다 break시키고 다중반복하면 인덱스 변해도 곱셈 범위 유지가능
+            for extra_repeat_mul in range(len(order)): #일단 반복문으로 해결 ^^ 이렇게 찾을때마다 break시키고 다중반복하면 인덱스 변해도 곱셈 범위 유지가능
                 for idx1, orderelement in enumerate(order): #연산이 길어지면 이런게 더필요함.... 나중에생각해보자.
                     if '*' in orderelement:
                         numbers[idx1] = numbers[idx1] * numbers[idx1 + 1] #계산에 필요한 숫자의 인덱스와 해당 숫자로 계산하기위해 필요한 연산자의 인덱스는 일치함
@@ -130,7 +130,7 @@ class Calculator:
             #-8*-9*-100*0.32-100
             
             flag = 0 #0으로 나누는 경우 반복을 빠져나갈 깃발
-            for extra_repeat in range(len(order)):
+            for extra_repeat_div in range(len(order)):
                 for idx2 in range(len(order)):
                     if order[idx2] == '/':
                         if numbers[idx2 + 1] == 0: 

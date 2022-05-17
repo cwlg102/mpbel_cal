@@ -1,5 +1,6 @@
 class Calculator:
-    def RecurCalculator(self, input_): #여기서는 매개변수 주지않아도 괜찮
+    def RecurCalculator(self, input_): #계산기, 재귀로 타고 들어오는 함수. 외부에서 쓸땐 매개변수 필요
+        #여기서는 매개변수 주지않아도 괜찮
         self.input_ = input_
         bcnt = Calculator.BracketCount(self.input_)
         
@@ -14,14 +15,15 @@ class Calculator:
 
         return result
 
-    def BracketCount(input_):
+    def BracketCount(input_): #입력의 괄호 수를 세주는 함수
         bketcnt = 0
         for ipt in range(len(input_)):
             if input_[ipt] == '(':
                 bketcnt += 1
         return bketcnt
 
-    def BracketIndexAppend(input_):
+    def BracketIndexAppend(input_): #괄호마다 인덱스를 새겨주는 함수
+        #'('의 인덱스를 세다가 ')'를 발견하는 순간 break 
         bketix_1st = []
         bketix_2nd = []
         for ipt in range(len(input_)):
@@ -33,15 +35,15 @@ class Calculator:
                 break
         return bketix_1st, bketix_2nd
 
-
-    def RecurEngine(bketix_1st, bketix_2nd, input_):
+    def RecurEngine(bketix_1st, bketix_2nd, input_): #괄호를 떼고 메인 함수(RecurCalculator)로 보내주는 함수
         obj = Calculator() #이렇게 호출해줄땐 매개변수를 주어야함!
         #재귀 타고 들어갈 함수가 Calculator 클래스의 self 매개변수? 인자를 가진 
         #RecurCalculator라는 함수라서 이렇게 매개변수를 줘야 
         #변수 한개 필요한데 두개줬다 라는 오류가 안뜸
         #이게 정확히 맞는진 모르겠으나....
+        #'('의 인덱스중 최댓값 +1, ')'의 인덱스 사이로 묶어서 괄호없게 만든후 다시 RecurCalculator로 보내서 계산
         if bketix_1st == [] and bketix_2nd == []:
-                pass
+                pass #재귀를 통해 이 단계까지 와야 더 이상 다시 돌아가지않음
         else:
             u = max(bketix_1st)
             v = bketix_2nd[0]
@@ -50,17 +52,17 @@ class Calculator:
             recur = obj.RecurCalculator(input_[u+1:v])
             input_ = fir + recur + sec
         return input_
-
-    
+   
     def DeleteMultiOperator(input_): #++과 --를 삭제 해주는 함수    
         input_ = input_.replace(')', '').strip() #문자열 입력이라 n을 얻을때 경우에 따라 ')'가 붙어나와서 괄호 기호들을 다 지워버림
         if '--' in input_:
             input_ = input_.replace('--', '+') #마이너스 두개는 플러스
         if '++' in input_:
             input_ = input_.replace('++', '') #중복되는 플러스들 다 삭제함
-        return input_
+        modinput_ = input_
+        return modinput_
 
-    def GetOperator(modinput_):
+    def GetOperator(modinput_): #연산자를 추출하는 함수
         order = []
         for idx, ipt in enumerate(modinput_): #반복문을 통해 수식에있는 연산자를 순서대로 order 리스트에 넣어줌
             if '+' in ipt:
@@ -82,7 +84,7 @@ class Calculator:
         
         return order
 
-    def GetNumber(modinput_):
+    def GetNumber(modinput_): #수들을 추출하는 함수
         for idx in range(len(modinput_)):
             if modinput_[idx] == '+': #숫자를 구분하기위해, 연산자를 모두 ';'로 바꿔버림
                 fir_mod = modinput_[:idx]
@@ -113,7 +115,7 @@ class Calculator:
 
         return numbers
 
-    def ComputeEngine(numbers, order):
+    def ComputeEngine(numbers, order): #추출한 연산자와 수들을 바탕으로 계산하는 함수
         if len(numbers) == 1:
             order = []
         while(1): #총 연산자 갯수만큼 연산을 하면 됨
